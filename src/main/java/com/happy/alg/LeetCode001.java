@@ -29,6 +29,7 @@ public class LeetCode001 {
             return new int[2];
         }
 
+        // from begin and end two directions to loop/circulation
         public int[] twoSum2(int[] nums, int target) {
             Map<Integer, Integer> map = new HashMap<>();
             for (int i = 0; i < nums.length; i++) {
