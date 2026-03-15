@@ -1,4 +1,4 @@
-package com.happy.algreview;
+package com.happy.alg;
 
 public class LeetCode867 {
 

@@ -8,6 +8,9 @@ import java.util.Map;
 //## Cache
 public class LeetCode001 {
 
+    public int[] var1;
+//    public int[3] var2; Java 规定在“声明”变量类型时，不能指定数组的长度。Java 的设计哲学类型归类型，实例归实例：
+
     public static void main(String[] args) {
         Solution T = new Solution();
         int[] result = T.twoSum(new int[]{1,2,3,4,5},6);
@@ -15,16 +18,15 @@ public class LeetCode001 {
     }
 
     static class Solution {
-        public int[] twoSum(int[] nums, int target) {
-            if(nums== null || nums.length==0 ) {
-                return new int[2];
-            }
-            HashMap<Integer,Integer> cache = new HashMap<>(nums.length);
+        public static int[] twoSum(int[]nums,int target){
+            if (nums == null || nums.length == 0) return new int[2];
+            Map<Integer, Integer> map = new HashMap<>();
             for (int i = 0; i < nums.length; i++) {
-                if(cache.containsKey(target-nums[i])){
-                    return new int[]{cache.get(target-nums[i]),i};
+                int complement = target - nums[i];
+                if (map.containsKey(complement)) {
+                    return new int[]{map.get(complement),i};
                 }
-                cache.put(nums[i],i);
+                map.put(nums[i], i);
             }
             return new int[2];
         }
