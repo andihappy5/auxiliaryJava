@@ -89,7 +89,26 @@ public class LeetCode001 {
         System.out.println(Arrays.toString(T.twoSum3(new int[] { 1, 2, 3, 4, 5 }, 6)));
     }
 
+    public int[] twoSum(int[] nums, int target) {
+        // first deal special cases
+        if (nums == null || nums.length == 0) {
+            return new int[2];
+        }
+        // data structure hashmap used to cache the value and index of the array
+        HashMap<Integer, Integer> cache = new HashMap<>(nums.length);
+        // loop the array and check if the complement of the current number (target -
+        // nums[i]) is already in the hashmap
+        for (int i = 0; i < nums.length; i++) {
+            if (cache.containsKey(target - nums[i])) {
+                return new int[] { cache.get(target - nums[i]), i };
+            }
+            cache.put(nums[i], i);
+        }
+        return new int[2];
+    }
+
     static class Solution {
+
         public int[] twoSum(int[] nums, int target) {
             if (nums == null || nums.length == 0) {
                 return new int[2];
