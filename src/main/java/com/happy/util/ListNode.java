@@ -18,15 +18,27 @@ public class ListNode {
         this.next = next;
     }
 
-    public static ListNode build(int[] vals){
-        if(vals == null || vals.length == 0) return null;
+    public static ListNode build(int[] vals) {
+        if (vals == null || vals.length == 0)
+            return null;
         ListNode head = new ListNode(vals[0]);
         ListNode cur = head;
-        for(int i=1;i<vals.length;i++){
+        for (int i = 1; i < vals.length; i++) {
             cur.next = new ListNode(vals[i]);
             cur = cur.next;
         }
         return head;
+    }
+
+    public static ListNode reverse(ListNode head) {
+        ListNode prev = null;
+        while (head != null) {
+            ListNode next = head.next;
+            head.next = prev;
+            prev = head;
+            head = next;
+        }
+        return prev;
     }
 
     @Override
