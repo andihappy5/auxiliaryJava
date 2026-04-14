@@ -1,10 +1,6 @@
-package com.happy;
+package com.happy.alg;
 
-/**
- * Hello world!
- *
- */
-public class App {
+public class LeetCode010a {
     public static void main(String[] args) {
         App.Solution solution = new App().new Solution();
         // System.out.println(solution.isMatchWithoutSpecialCharacter("aa", "a"));
@@ -221,5 +217,4 @@ public class App {
             return dp[s.length()][p.length()];
         }
     }
-
 }

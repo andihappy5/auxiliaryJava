@@ -1,4 +1,5 @@
 package com.happy.alg;//Implement atoi which converts a string to an integer.
+
 //
 // The function first discards as many whitespace characters as necessary until 
 //the first non-whitespace character is found. Then, starting from this character 
@@ -85,13 +86,14 @@ public class LeetCode008 {
             if (s == null || s.length() == 0)
                 return 0;
             char[] sa = s.toCharArray();
-            //Whitespace: Ignore any leading whitespace (" ").
+            // Whitespace: Ignore any leading whitespace (" ").
             int result = 0;
             int flag = 1;
             int cur = 0;
             while (cur < s.length() && sa[cur] == ' ')
                 cur++;
-            // Signedness: Determine the sign by checking if the next character is '-' or '+', assuming positivity if neither present.
+            // Signedness: Determine the sign by checking if the next character is '-' or
+            // '+', assuming positivity if neither present.
             if (cur < s.length() && sa[cur] == '-') {
                 flag = -1;
                 cur++;
@@ -101,12 +103,15 @@ public class LeetCode008 {
                     cur++;
             }
 
-            // Conversion: Read the integer by skipping leading zeros until a non-digit character is encountered or
-            // the end of the string is reached. If no digits were read, then the result is 0.
+            // Conversion: Read the integer by skipping leading zeros until a non-digit
+            // character is encountered or
+            // the end of the string is reached. If no digits were read, then the result is
+            // 0.
 
             while (cur < s.length() && Character.isDigit(sa[cur])) {
                 int tmp = sa[cur] - '0';
-                // Range Checking: If the integer exceeds the 32-bit signed integer range [-2^31, 2^31 - 1], clamp it to the nearest bound.
+                // Range Checking: If the integer exceeds the 32-bit signed integer range
+                // [-2^31, 2^31 - 1], clamp it to the nearest bound.
                 if ((Integer.MAX_VALUE - tmp) / 10 < result) {
                     return flag > 0 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
                 } else {
@@ -114,11 +119,9 @@ public class LeetCode008 {
                 }
                 cur++;
             }
-            return flag*result;
+            return flag * result;
         }
     }
-
-
 
     public static int myAtoi(String s) {
         // exception judge
@@ -181,5 +184,60 @@ public class LeetCode008 {
 
         System.out.println(myAtoi("-2147483649"));
         System.out.println(s.myAtoi("-2147483649"));
+    }
+
+    public static class App {
+        public static void main(String[] args) {
+            // test myAtoi
+            App.Solution s = new App().new Solution();
+            System.out.println(s.myAtoi("42"));
+            System.out.println(s.myAtoi(" -042"));
+            System.out.println(s.myAtoi("1337c0d3"));
+            System.out.println(s.myAtoi("0-1"));
+            System.out.println(s.myAtoi("words and 987"));
+            System.out.println(s.myAtoi("-3"));
+            System.out.println(s.myAtoi("" + Integer.MAX_VALUE));// 2147483647
+            System.out.println(s.myAtoi("-2147483648"));
+            System.out.println(s.myAtoi("" + Integer.MIN_VALUE));// -2147483648
+            System.out.println(s.myAtoi("4193 with words"));
+            System.out.println(s.myAtoi("-91283472332"));
+            System.out.println(s.myAtoi(" "));
+        }
+
+        class Solution {
+            public int myAtoi(String s) {
+                // corner case
+                if (s == null || s.length() == 0)
+                    return 0;
+                // first confirm the begin ignore any leading space
+                int index = 0;
+                while (index < s.length() && s.charAt(index) == ' ')
+                    index++;
+                boolean flag = true;
+                // special sign to confirm positive or negative
+                if (index < s.length() && (s.charAt(index) == '+' || s.charAt(index) == '-')) {
+                    flag = s.charAt(index) == '+' ? true : false;
+                    index++;
+                }
+
+                int result = 0;
+                while (index < s.length()) {
+                    char c = s.charAt(index);
+                    if (Character.isDigit(c)) {
+                        // deal overflow situation
+                        System.out.println((Integer.MAX_VALUE - (c - '0')) / 10 + " " + result);
+                        if ((Integer.MAX_VALUE - (c - '0')) / 10 < result) {
+                            // 整体的限定范围在Integer.MAX_VALUE/10这个范围
+                            return flag ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+                        }
+                        result = result * 10 + c - '0';
+                    } else {
+                        break;
+                    }
+                    index++;
+                }
+                return flag ? result : -result;
+            }
+        }
     }
 }
