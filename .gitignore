@@ -3,4 +3,8 @@
 z.iml
 src/.DS_Store
 .idea
+.classpath
+.project
 /auxiliaryHelp.iml
+.settings/org.eclipse.m2e.core.prefs
+.settings/org.eclipse.*

@@ -1,4 +1,5 @@
 package com.happy.alg;//The string "PAYPALISHIRING" is written in a zigzag pattern on a given number o
+
 //f rows like this: (you may want to display this pattern in a fixed font for bett
 //er legibility) 
 //
@@ -56,10 +57,15 @@ package com.happy.alg;//The string "PAYPALISHIRING" is written in a zigzag patte
 public class LeetCode006 {
 
     class Solution {
-        //折叠string
+        // the Question is not about algorimthm，but about code and understand the
+        // problem meaning，and then find the regular pattern
         public String convert(String s, int numRows) {
+            // corner case
             if (s == null || s.length() <= numRows || numRows == 1)
                 return s;
+
+            // use StringBuilder to store the result of each row, and then combine them
+            // together . but not forgot initialize the StringBuilder for each row
             StringBuilder[] res = new StringBuilder[numRows];
             for (int i = 0; i < res.length; i++) {
                 res[i] = new StringBuilder();
@@ -83,8 +89,30 @@ public class LeetCode006 {
             }
             return result.toString();
         }
+
+        //
+        public String convert2(String s, int numRows) {
+            if (numRows == 1 || numRows >= s.length())
+                return s;
+
+            int n = s.length();
+            int cycle = 2 * (numRows - 1);
+            char[] result = new char[n];
+            int idx = 0;
+
+            for (int row = 0; row < numRows; row++) {
+                for (int j = row; j < n; j += cycle) {
+                    result[idx++] = s.charAt(j);
+                    int diag = j + cycle - 2 * row;
+                    if (row != 0 && row != numRows - 1 && diag < n) {
+                        result[idx++] = s.charAt(diag);
+                    }
+                }
+            }
+            return new String(result);
+        }
     }
-    
+
     public String convert(String s, int numRows) {
         if (s == null || s.length() <= numRows)
             return s;
@@ -116,5 +144,5 @@ public class LeetCode006 {
         LeetCode006.Solution s = T.new Solution();
         System.out.println(s.convert("PAYPALISHIRING", 4));
     }
-    
+
 }
