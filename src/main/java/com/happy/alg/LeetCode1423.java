@@ -111,6 +111,6 @@ public class LeetCode1423 {
 
     public static void main(String[] args) {
         LeetCode1423.Solution solution = new LeetCode1423().new Solution();
-        System.out.println(solution.maxScore(new int[]{1, 2, 3, 4, 5, 6, 1}, 3));
+        System.out.println(solution.maxScore(new int[] { 1, 2, 3, 4, 5, 6, 1 }, 3));
     }
 }

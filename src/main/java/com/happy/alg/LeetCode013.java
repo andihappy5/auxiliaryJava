@@ -96,26 +96,26 @@ public class LeetCode013 {
         comvertMap.put('D', 500);
         comvertMap.put('M', 1000);
     }
+
     class Solution {
-        public  int romanToInt(String s) {
+        public int romanToInt(String s) {
             // special case
             if (s == null || s.trim().length() == 0)
                 return 0;
             char[] tmp = s.toCharArray();
             int result = 0;
             int cur = 0;
-            while(cur < tmp.length){
+            while (cur < tmp.length) {
                 char tmpchar = tmp[cur];
                 char tmpafter = cur + 1 >= tmp.length ? 'a' : tmp[cur + 1];
-                //根据后一个字符的大小，决定是加还是减
+                // 根据后一个字符的大小，决定是加还是减
                 result = (comvertMap.get(tmpchar) >= comvertMap.get(tmpafter)) ? (result + comvertMap.get(tmpchar))
                         : (result - comvertMap.get(tmpchar));
                 cur++;
             }
-            return  result;
+            return result;
         }
     }
-
 
     public static int romanToInt(String s) {
         char[] tmp = s.toCharArray();
@@ -132,10 +132,76 @@ public class LeetCode013 {
     }
 
     static public void main(String[] args) {
-        
+
         System.out.println("hello holiday");
 
         System.out.println(romanToInt("MLC"));
     }
-    
+
+    static class App {
+        public static void main(String[] args) {
+            App.Solution solution = new App().new Solution();
+            System.out.println(solution.romanToInt("III"));
+            System.out.println(solution.romanToInt("LVIII"));
+            System.out.println(solution.romanToInt("MCMXCIV"));
+        }
+
+        class Solution {
+            public static Map<Character, Integer> map = new HashMap<>();
+            static {
+                map.put('I', 1);
+                map.put('V', 5);
+                map.put('X', 10);
+                map.put('L', 50);
+                map.put('C', 100);
+                map.put('D', 500);
+                map.put('M', 1000);
+            }
+
+            public int romanToInt(String s) {
+                if (s == null || s.length() < 1) {
+                    return 0;
+                }
+                int result = 0;
+                for (int i = 0; i < s.length(); i++) {
+                    char c = s.charAt(i);
+                    int cv = map.get(c);
+                    int ncv = 0;
+                    if (i + 1 < s.length()) {
+                        char nc = s.charAt(i + 1);
+                        ncv = map.get(nc);
+                    }
+                    if (cv < ncv) {
+                        result = result - cv;
+                    } else {
+                        result = result + cv;
+
+                    }
+                }
+                return result;
+            }
+
+            public int romanToInt2(String s) {
+                int prev = Integer.MAX_VALUE;
+                int res = 0;
+
+                for (int i = 0; i < s.length(); i++) {
+                    int val = map.get(s.charAt(i));
+
+                    if (prev < val) {
+                        res -= prev;
+                        res += (val - prev);
+                    } else {
+                        res += val;
+                    }
+                    prev = val;
+                }
+
+                return res;
+
+            }
+        }
+
+    }
+
 }

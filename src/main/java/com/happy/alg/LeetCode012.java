@@ -1,5 +1,6 @@
 package com.happy.alg;
 //Roman numerals are represented by seven different symbols: I, V, X, L, C, D an
+
 //d M. 
 //
 // 
@@ -75,17 +76,71 @@ package com.happy.alg;
 // 1 <= num <= 3999 
 //
 
+import java.util.HashMap;
+import java.util.Map;
 
 public class LeetCode012 {
 
-    public static  String intToRoman(int num) {
-        //0,1000,2000,3000
+    static class App {
+        public static void main(String[] args) {
+            App.Solution solution = new App().new Solution();
+            System.out.println(solution.intToRoman(3749));
+            System.out.println(solution.intToRoman(58));
+        }
+
+        public static Map<Integer, String> map = new HashMap<>(10);
+        static {
+            map.put(0, "");
+            map.put(1, "I");
+            map.put(2, "II");
+            map.put(3, "III");
+            map.put(4, "IV");
+            map.put(5, "V");
+            map.put(6, "VI");
+            map.put(7, "VII");
+            map.put(8, "VIII");
+            map.put(9, "IX");
+            map.put(10, "X");
+            map.put(20, "XX");
+            map.put(30, "XXX");
+            map.put(40, "XL");
+            map.put(50, "L");
+            map.put(60, "LX");
+            map.put(70, "LXX");
+            map.put(80, "LXXX");
+            map.put(90, "XC");
+            map.put(100, "C");
+            map.put(200, "CC");
+            map.put(300, "CCC");
+            map.put(400, "CD");
+            map.put(500, "D");
+            map.put(600, "DC");
+            map.put(700, "DCC");
+            map.put(800, "DCCC");
+            map.put(900, "CM");
+            map.put(1000, "M");
+            map.put(2000, "MM");
+            map.put(3000, "MMM");
+
+        }
+
+        class Solution {
+            public String intToRoman(int num) {
+                return map.get(num / 1000 * 1000) + map.get(num % 1000 / 100 * 100) + map.get(num % 100 / 10 * 10)
+                        + map.get(num % 10);
+            }
+        }
+
+    }
+
+    public static String intToRoman(int num) {
+        // 0,1000,2000,3000
         String M[] = { "", "M", "MM", "MMM" };
-        //0,100,200,300,400,500,600,700,800,900
+        // 0,100,200,300,400,500,600,700,800,900
         String C[] = { "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" };
-        //0,10,20,30,40,50,60,70,80,90
+        // 0,10,20,30,40,50,60,70,80,90
         String X[] = { "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" };
-        //0,1,2,3,4,5,6,7,8,9
+        // 0,1,2,3,4,5,6,7,8,9
         String I[] = { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
         return M[num / 1000] + C[(num % 1000) / 100] + X[(num % 100) / 10] + I[num % 10];
     }
@@ -95,5 +150,5 @@ public class LeetCode012 {
 
         System.out.println(intToRoman(2345));
     }
-    
+
 }

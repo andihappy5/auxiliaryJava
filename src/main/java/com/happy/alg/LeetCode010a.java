@@ -2,7 +2,7 @@ package com.happy.alg;
 
 public class LeetCode010a {
     public static void main(String[] args) {
-        App.Solution solution = new App().new Solution();
+        LeetCode010a.Solution solution = new LeetCode010a().new Solution();
         // System.out.println(solution.isMatchWithoutSpecialCharacter("aa", "a"));
         // System.out.println(solution.isMatchWithoutSpecialCharacter("aa", "aa"));
         // System.out.println(solution.isMatchWithoutSpecialCharacter("ab", ".*"));
