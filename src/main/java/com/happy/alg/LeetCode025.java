@@ -58,10 +58,11 @@ public class LeetCode025 {
     // 1 <= sz <= 5000
     // 0 <= Node.val <= 1000
     // 1 <= k <= sz
-
     public static ListNode reverseKGroup(ListNode head, int k) {
-        if (head == null || k == 1)
+        if (head == null || head.next == null || k == 1) {
             return head;
+        }
+        
         ListNode cur = head;
         ListNode kcur = head;
         int ktmp = k;
@@ -129,12 +130,19 @@ public class LeetCode025 {
 
     // 添加一种是如此优雅，如此的简洁的迭代的解决方案
     static class Day202604164 {
+
         public static void main(String[] args) {
             System.out.println("Keep Happy ,Boy!");
             System.out.println(reverseKGroup(ListNode.build(new int[] { 1, 2, 3, 4, 5, 6, 7 }), 3));
         }
 
         // this Question is about linkedList and reverse
+        // 1. test weather we have more then k node left,if less then k node left we
+        // just return head
+        // 2.reverse k node at current level. and return the new head of the reversed list,
+        // this new head will be the next node of the current head.
+        // 3.connect the new head of the reversed list to the current head.
+        // 4.return the new head of the reversed list.
         public static ListNode reverseKGroup(ListNode head, int k) {
             // 1. test weather we have more then k node left,if less then k node left we
             // just return head
