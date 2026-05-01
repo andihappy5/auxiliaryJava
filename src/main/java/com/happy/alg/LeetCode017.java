@@ -127,6 +127,12 @@ public class LeetCode017 {
             }
         }
 
+        // this is the general solution for all the problems that need to find all the
+        // combinations of the given digits.
+        // it is about backtrack and meet condition break！
+        // the condition break is the key to the success of the solution.
+        // and the stringbuilder add and remove character is the key to understand the
+        // backtrack algorithm.
         public List<String> letterCombinationsG(String digits) {
             List<String> res = new ArrayList<>();
             backtrack(digits, 0, new StringBuilder(), res);

@@ -2,10 +2,6 @@ package com.happy.alg;
 
 /**
  33. Search in Rotated Sorted Array
- 中等
- 相关标签
- premium lock icon
- 相关企业
  There is an integer array nums sorted in ascending order (with distinct values).
 
  Prior to being passed to your function, nums is possibly left rotated at an unknown index k (1 <= k < nums.length) such that the resulting array is [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]] (0-indexed). For example, [0,1,2,4,5,6,7] might be left rotated by 3 indices and become [4,5,6,7,0,1,2].
@@ -13,9 +9,6 @@ package com.happy.alg;
  Given the array nums after the possible rotation and an integer target, return the index of target if it is in nums, or -1 if it is not in nums.
 
  You must write an algorithm with O(log n) runtime complexity.
-
-
-
  Example 1:
 
  Input: nums = [4,5,6,7,0,1,2], target = 0
@@ -115,6 +108,85 @@ public class LeetCode033 {
         System.out.println("keep happy ！");
 //        System.out.println(search(new int[]{4,5,6,7,0,1,2},1));
         System.out.println(search(new int[]{4,5,6,7,0,1,2},5));
+    }
+
+    static class Day202604211 {
+        public static void main(String[] args) {
+            System.out.println("Keep Happy!");
+            System.out.println(search(new int[]{1,3,5},5));
+            System.out.println(search(new int[]{1,3},3));
+            System.out.println(search(new int[]{3,1},1));
+            System.out.println(search(new int[]{4,5,6,7,0,1,2},1));
+            System.out.println(search(new int[]{4,5,6,7,8,0,1,2},1));
+            System.out.println(search(new int[]{4,5,0,1,2},1));
+        }
+
+        class Solution {
+            public int search(int[] nums, int target) {
+                int start = 0, end = nums.length - 1;
+                while (start <= end) {
+                    int mid = start + (end - start) / 2;
+                    if (nums[mid] == target) return mid;
+                    // Check if left part is sorted
+                    if (nums[mid] >= nums[start]) {
+                        if (target >= nums[start] && target < nums[mid]) {
+                            end = mid - 1; // move left
+                        } else {
+                            start = mid + 1; // move right
+                        }
+                    }
+                    // Right part is sorted
+                    else {
+                        if (target > nums[mid] && target <= nums[end]) {
+                            start = mid + 1; // move right
+                        } else {
+                            end = mid - 1; // move left
+                        }
+                    }
+                }
+                return -1;
+            }
+        }
+
+        /**
+         Input: nums = [4,5,6,7,0,1,2], target = 0
+         Output: 4
+         Input: nums = [4,5,6,7,0,1,2], target = 3
+         Output: -1
+         * */
+        public static  int search(int[] nums, int target) {
+            if (nums == null || nums.length == 0) return -1;
+            return search(nums, target,0,nums.length - 1);
+        }
+
+        private static int search(int[] nums, int target, int from, int end) {
+            if (from > end) return -1;
+            if (from == end) return nums[from]==target?from: -1;
+            int mid = from +(end-from)/2;
+            if (nums[mid] == target) return mid;
+            if (mid == from) return nums[end] == target?end: -1;
+
+            // //4,5,6,7,0,1,2
+            //
+            //首先确定 mid 所在的位置，这个位置的判断，可以使用 nums[mid] 和 nums[from] 比较 还是nums[mid] 和 nums[ end] 比较
+            // nums[mid] 和 nums[from] 比较,容易判断 mid 在rotated前，还是rotated后，如果是小于nums[from]，则包含rotated，如果大于，则不包含
+            if (nums[mid] > nums[from]){
+                // 4,5,6,mid,7,0,1,2
+                // 0,1,2,3,4,mid 5,6,7
+                if (target > nums[mid]){
+                    return search(nums, target, mid+1, end);
+                }else {
+//                nums[mid] > nums[from]  && target < nums[mid]
+                    if (nums[mid] < nums[end]){
+                        // target < nums[mid] && target < nums[end]
+                    }
+                }
+                return search(nums, target, from, mid-1);
+            }else{
+                // 4,5,6,7,0,mid,1,2
+                return search(nums, target, mid+1, end);
+            }
+        }
     }
 
 }

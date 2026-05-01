@@ -43,9 +43,18 @@ public class LeetCode018 {
         System.out.println(l.fourSum(new int[] { 1000000000, 1000000000, 1000000000, 1000000000 }, -294967296));
     }
 
-    // sum to target, so we can use two pointers to find the solution,
-    // but we need to sort the array first,
-    // and skip the same elements to avoid duplicate quadruplets.
+    /*
+     sum to target, so we can use two pointers to find the solution,
+     but we need to sort the array first,
+     and skip the same elements to avoid duplicate quadruplets.
+     ## explanation in interview
+     The question is simlar to the three sum problem, but with four elements.
+     notice:
+     1. overflow we use long to avoid the overflow.
+     2. duplicate quadruplets, we skip the same elements to avoid duplicate
+     quadruplets.
+     */
+
     public List<List<Integer>> fourSum(int[] nums, int target) {
         // deal the special case
         if (nums == null || nums.length < 4) {
