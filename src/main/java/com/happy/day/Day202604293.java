@@ -9,14 +9,14 @@ public class Day202604293 {
 
     public static void main(String[] args) {
         Day202604293 d = new Day202604293();
-        System.out.println(d.grayCode(4));
-        System.out.println(d.restoreIpAddresses("25525511135"));
+//        System.out.println(d.grayCode(4));
+        System.out.println(d.restoreIpAddresses("255255111"));
     }
 
     public static  List<String> restoreIpAddresses(String s) {
         List<String> result  = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
-        restoreIpAddresses(s,0,sb,result);
+        List<String> tmp = new ArrayList<>();
+        restoreIpAddresses(s,0,2,0,tmp,result);
         return result;
     }
 
@@ -28,24 +28,44 @@ public class Day202604293 {
     }
 
     // s input
-    // i cur index
+    // i cur index 当前的起始值,
+    // len cur length 当前的长度
     // sb temp result
     // result
-    private static void restoreIpAddresses(String s, int i, StringBuilder sb, List<String> result) {
-        if (i >= s.length()) {
-            result.add(sb.toString());
+    private static void restoreIpAddresses(String s, int curStart,int curEnd,int step,
+                                           List<String> tmp, List<String> result) {
+        //三段
+        if (step >= 3 && curEnd < s.length() ) {
+            return;
         }
-        for (int j = i; j < sb.length(); j++) { //每一个位置1，,2，,3
-            for (int k = 1; k <= 3; k++) {
-                if(j+k <= s.length()){
-                    String str = sb.substring(j, j+k);
-                    if (isIp(str)) {
-                        sb.append(str).append('.');
-                        restoreIpAddresses(s,j+k,sb,result);
-                    }
-                }
+        if (curEnd >= s.length()) {
+            result.add(construct(tmp));
+            return;
+        }
+        //每一段最长包含三个字符，最短包含一个字符
+        for (int k = curStart+1; k <= curEnd+1; k++) {
+            String str = s.substring(curStart, k);
+            tmp.add(str);
+            if (isIp(str)) {
+                restoreIpAddresses(s,k,k+3,step+1,tmp,result);
+            }
+            tmp.remove(tmp.size()-1);
+        }
+    }
+
+
+
+
+    private static String construct(List<String> tmp) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < tmp.size(); i++) {
+            if (i != tmp.size() - 1) {
+                sb.append(tmp.get(i)).append(".");
+            }else{
+                sb.append(tmp.get(i));
             }
         }
+        return sb.toString();
     }
 
 
