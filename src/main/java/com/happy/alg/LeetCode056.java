@@ -9,7 +9,7 @@ public class LeetCode056 {
     public static  int[][] merge(int[][] intervals) {
         if (intervals == null || intervals.length <= 1)
             return intervals;
-        Arrays.sort(intervals,(int[] t1, int[] t2)-> t1[0] ==t2[0]?0:t1[0]>t2[0]?1:-1 );
+        Arrays.sort(intervals,(int[] t1, int[] t2)-> Integer.compare(t1[0], t2[0]));
 
 //        Arrays.sort(intervals,(int[] t1,int[] t2)->{ return t1[0]>t2[0]?1:-1;});
         List<int[]> result = new ArrayList<>();
@@ -27,12 +27,13 @@ public class LeetCode056 {
                 result.add(new int[]{start, end});
                 start = tmps;
                 end = tmpe;
-            } else {
-                start = tmps;
-                if (tmpe >= end) {
-                    end = tmpe;
-                }
             }
+//            else { // because already sorted
+//                start = tmps;
+//                if (tmpe >= end) {
+//                    end = tmpe;
+//                }
+//            }
         }
         result.add(new int[]{start, end});
 
