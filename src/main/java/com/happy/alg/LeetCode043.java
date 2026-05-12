@@ -1,14 +1,8 @@
 package com.happy.alg;
 
+import java.util.ArrayList;
+
 public class LeetCode043 {
-
-    /**
-     * 你说，怎么样才能突破自己，实现自己的梦想，实现自己无忧的梦想
-     * 首先还是，需要控制住自己，控制住自己的精力，自己的时间，不然那些浪费掉的岁月，总会找上门来进行讨债的
-     * 其次，你需要坚守一个一个目标：一心一意的做技术，寻找自己适合的技术方向
-     * 最后，坚持住！
-     */
-
 
     /**
      43. Multiply Strings
@@ -38,59 +32,9 @@ public class LeetCode043 {
 
      * */
 
-    //  1 <= num1.length, num2.length <= 200
-    public static String multiply_w(String num1, String num2) {
-        if("0".equals(num1)||"0".equals(num2)) return "0";
-        if("1".equals(num1)) return num2;
-        if("1".equals(num2)) return num1;
 
-        char[] n1=num1.toCharArray().length > num2.toCharArray().length?num1.toCharArray():num2.toCharArray();
-        char[] n2=num1.toCharArray().length > num2.toCharArray().length?num2.toCharArray():num1.toCharArray();
-
-//        n1 = 123
-//        n2 = 12
-
-        System.out.println(num1);
-        System.out.println(num2);
-
-
-        int result = 0;int tmpn2=1;
-        for (int i = 0; i < n2.length; i++) {
-            int n2i = n2[n2.length-1-i] - '0';
-            int tmpResult = 0;int carry=0;
-//            tmpResult= multiply(n2i,n1);
-
-            result=result+tmpResult*tmpn2;
-            tmpn2=tmpn2*10;
-        }
-
-//        StringBuilder builder = new StringBuilder();
-//        while (result > 0){
-//            builder.append(result%10);
-//            result=result/10;
-//        }
-
-
-        return String.valueOf(result);
-    }
-
-//    private static String multiply(int n2i, char[] n1) {
-//        StringBuilder tmpResult = new StringBuilder();
-//        int carry=0;
-//        for (int i = 0; i < n1.length; i++) {
-//            int n1i = n1[n1.length-1-i]-'0';
-//            int value = n2i*n1i+carry;
-//            int v = value%10;
-//            carry=value/10;
-//            tmpResult.insert(0,v);
-//        }
-//        if(carry > 0){
-//            tmpResult.insert(0,carry);
-//        }
-//       return tmpResult.toString();
-//    }
-
-    public static String multiply(String num1, String num2) {
+    //special method
+    public static String multiply_NeverThinkOut(String num1, String num2) {
         int n1 = num1.length(), n2 = num2.length();
         int[] products = new int[n1 + n2];
         for (int i = n1 - 1; i >= 0; i--) {
@@ -116,8 +60,16 @@ public class LeetCode043 {
 
     public static void main(String[] args) {
         System.out.println("keep Happy boy");
-        System.out.println(add("123213","544545"));
-        System.out.println(multiply(new char[]{'1','0','9'},new char[]{'4','5','9'}));
+//        System.out.println(add("123213","544545"));
+//        System.out.println(multiply(new char[]{'1','0','9'},new char[]{'4','5','9'}));
+        System.out.println(multiply("123".toCharArray(),"456".toCharArray()));
+    }
+
+    public  String multiply(String num1, String num2) {
+        if(num1.equals("0") || num2.equals("0")) return "0";
+        if(num1.equals("1") ) return num2;
+        if(num2.equals("1") ) return num1;
+        return multiply(num1.toCharArray(),num2.toCharArray());
     }
 
     private static String multiply(char[] n2, char[] n1) {
@@ -171,5 +123,108 @@ public class LeetCode043 {
             tmpResult.insert(0,carry);
         }
         return tmpResult;
+    }
+
+    static class Solution {
+        // Calculate the sum of all of the results from multiplyOneDigit.
+        private StringBuilder sumResults(ArrayList<ArrayList<Integer>> results) {
+            // Initialize answer as a number from results.
+            ArrayList<Integer> answer = new ArrayList<>(
+                    results.get(results.size() - 1)
+            );
+            ArrayList<Integer> newAnswer = new ArrayList<>();
+
+            // Sum each digit from answer and result
+            for (int j = 0; j < results.size() - 1; ++j) {
+                ArrayList<Integer> result = new ArrayList<>(results.get(j));
+                newAnswer = new ArrayList<>();
+
+                int carry = 0;
+
+                for (int i = 0; i < answer.size() || i < result.size(); ++i) {
+                    // If answer is shorter than result or vice versa, use 0 as the current digit.
+                    int digit1 = i < result.size() ? result.get(i) : 0;
+                    int digit2 = i < answer.size() ? answer.get(i) : 0;
+                    // Add current digits of both numbers.
+                    int sum = digit1 + digit2 + carry;
+                    // Set carry equal to the tens place digit of sum.
+                    carry = sum / 10;
+                    // Append the ones place digit of sum to answer.
+                    newAnswer.add(sum % 10);
+                }
+
+                if (carry != 0) {
+                    newAnswer.add(carry);
+                }
+                answer = newAnswer;
+            }
+
+            // Convert answer to a string.
+            StringBuilder finalAnswer = new StringBuilder();
+            for (int digit : answer) {
+                finalAnswer.append(digit);
+            }
+            return finalAnswer;
+        }
+
+        // Multiply the current digit of secondNumber with firstNumber.
+        ArrayList<Integer> multiplyOneDigit(
+                StringBuilder firstNumber,
+                char secondNumberDigit,
+                int numZeros
+        ) {
+            // Insert zeros at the beginning based on the current digit's place.
+            ArrayList<Integer> currentResult = new ArrayList<>();
+            for (int i = 0; i < numZeros; ++i) {
+                currentResult.add(0);
+            }
+
+            int carry = 0;
+
+            // Multiply firstNumber with the current digit of secondNumber.
+            for (int i = 0; i < firstNumber.length(); ++i) {
+                char firstNumberDigit = firstNumber.charAt(i);
+                int multiplication =
+                        (secondNumberDigit - '0') * (firstNumberDigit - '0') + carry;
+                // Set carry equal to the tens place digit of multiplication.
+                carry = multiplication / 10;
+                // Append last digit to the current result.
+                currentResult.add(multiplication % 10);
+            }
+
+            if (carry != 0) {
+                currentResult.add(carry);
+            }
+            return currentResult;
+        }
+
+        public String multiply(String num1, String num2) {
+            if (num1.equals("0") || num2.equals("0")) {
+                return "0";
+            }
+
+            StringBuilder firstNumber = new StringBuilder(num1);
+            StringBuilder secondNumber = new StringBuilder(num2);
+
+            // Reverse both the numbers.
+            firstNumber.reverse();
+            secondNumber.reverse();
+
+            // For each digit in secondNumber, multipy the digit by firstNumber and
+            // store the multiplication result (reversed) in results.
+            ArrayList<ArrayList<Integer>> results = new ArrayList<>();
+            for (int i = 0; i < secondNumber.length(); ++i) {
+                results.add(
+                        multiplyOneDigit(firstNumber, secondNumber.charAt(i), i)
+                );
+            }
+
+            // Add all the results in the results array, and store the sum in the answer string.
+            StringBuilder answer = sumResults(results);
+
+            // answer is reversed, so reverse it to get the final answer.
+            answer.reverse();
+            return answer.toString();
+        }
     }
 }

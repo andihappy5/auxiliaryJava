@@ -5,6 +5,13 @@ package com.happy.alg;
  */
 public class LeetCode050 {
 
+    static void main() {
+        System.out.println(LeetCode050.myPow(2.0000,10));
+    }
+
+    /**
+     * Typical recursion problems
+     * */
     public static double myPow(double x, int n) {
         if (n == 0) return 1.0;
         if (n == 1) return x;
@@ -20,7 +27,6 @@ public class LeetCode050 {
             }else{
                 return myPow(1/x,-n);
             }
-
         }
     }
 }

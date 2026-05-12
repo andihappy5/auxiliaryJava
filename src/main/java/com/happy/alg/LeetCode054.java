@@ -68,7 +68,6 @@ public class LeetCode054 {
         int[] rightbotom = new int[]{m-1,n-1};
 
         while(ans.size() < m*n){
-
             for (int i = lefttop[1]; i <= righttop[1] && ans.size() < m*n; i++) {
                 ans.add(matrix[lefttop[0]][i]);
             }
@@ -93,11 +92,13 @@ public class LeetCode054 {
             lefttop[1]++;
             leftbotom[1]++;
         }
-
-
         return ans;
     }
 
+    /**
+     * four location confirm the loop point
+     * four loop used the locations confirm the answer
+     * */
     public static List<Integer> spiralOrder(int[][] matrix) {
 
         int m = matrix.length;
@@ -107,30 +108,24 @@ public class LeetCode054 {
         int top = 0, bottom = m-1;
 
         List<Integer> ans = new ArrayList<>();
-
         while(ans.size() < m*n){
-
             for(int j=left; j<=right && ans.size() < m*n ; j++){
                 ans.add(matrix[top][j]);
             }
             top++;
-
             for(int i = top; i<=bottom && ans.size() < m*n ; i++){
                 ans.add(matrix[i][right]);
             }
             right--;
-
             for(int j=right; j>=left && ans.size() < m*n; j--){
                 ans.add(matrix[bottom][j]);
             }
             bottom--;
-
             for(int i=bottom; i>=top && ans.size() < m*n; i--){
                 ans.add(matrix[i][left]);
             }
             left++;
         }
-
         return ans;
     }
 }

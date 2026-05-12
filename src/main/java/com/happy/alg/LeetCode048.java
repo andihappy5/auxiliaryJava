@@ -68,6 +68,59 @@ public class LeetCode048 {
 // [16,7,10,11]]
 //
 
+    static class Solution {
+
+        static void main() {
+            int[][] matrix = new int[][]{{1,2,3},{4,5,6},{7,8,9}};
+            rotate((matrix));
+        }
+
+        public static  void rotate(int[][] matrix) {
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix[0].length; j++) {
+                    System.out.print(" " + matrix[i][j] + " ");
+                }
+                System.out.println();
+            }
+            //------------change 180 ---------------
+            int ii =0,jj = matrix.length-1;
+            while(ii<jj){
+                for(int k=0;k<matrix[0].length;k++){
+                    int temp = matrix[ii][k];
+                    matrix[ii][k] = matrix[jj][k];
+                    matrix[jj][k] = temp;
+                }
+                ii++;
+                jj--;
+            }
+
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix[0].length; j++) {
+                    System.out.print(" " + matrix[i][j] + " ");
+                }
+                System.out.println();
+            }
+
+            //-------------------90---------------------
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix[0].length; j++) {
+                    if(i>=j) continue;
+                    int value = matrix[i][j];
+                    matrix[i][j] = matrix[j][i];
+                    matrix[j][i] = value;
+                }
+            }
+
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix[0].length; j++) {
+                    System.out.print(" " + matrix[i][j] + " ");
+                }
+                System.out.println();
+            }
+
+        }
+    }
+
     public static void rotate(int[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {

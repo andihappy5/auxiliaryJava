@@ -37,12 +37,14 @@ public class LeetCode049 {
     public static void main(String[] args) {
         System.out.println("keep Happy boy");
         List<List<String>> result = groupAnagrams(new String[]{"eat","tea","tan","ate","nat","bat"});
-        for (List a :
-                result) {
+        for (List a : result) {
             System.out.println(a.toString());
             System.out.println("------------------");
         }
     }
+
+    // confirm the unique key of anagrams by sort
+    // use the hashmap to judge the "same" string
     public static  List<List<String>> groupAnagrams(String[] strs) {
         if( null == strs || strs.length == 0) return new ArrayList<>();
         List<List<String>> result = new ArrayList<>();
