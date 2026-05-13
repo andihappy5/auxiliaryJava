@@ -40,7 +40,7 @@ public class LeetCode64MinimumPathSum {
     }
 
     public int minPathSum(int[][] grid) {
-        return minPath(grid, grid.length - 1, grid[0].length - 1);
+        return minPath1(grid, grid.length - 1, grid[0].length - 1);
     }
 
     // one： from bottom to up
@@ -52,7 +52,7 @@ public class LeetCode64MinimumPathSum {
         if (i == 0 && j == 0) {
             return grid[i][j];
         }
-        return grid[i][j] + Math.min(minPath(grid, i - 1, j), minPath(grid, i, j - 1));
+        return grid[i][j] + Math.min(minPath1(grid, i - 1, j), minPath1(grid, i, j - 1));
     }
 
     // 2. from top to bottom

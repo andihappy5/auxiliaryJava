@@ -1,9 +1,6 @@
 package com.happy.alg;
 
 public class LeetCode065_validNumber {
-    public static void main(String[] args) {
-
-    }
 
     /**
      * Given a string s, return whether s is a valid number.
@@ -55,36 +52,40 @@ public class LeetCode065_validNumber {
      * s consists of only English letters (both uppercase and lowercase), digits
      * (0-9), plus '+', minus '-', or dot '.'.
      */
+    public static void main(String[] args) {
+        System.out.println(new LeetCode065_validNumber().isNumber("-1E+3"));
+    }
+
     public boolean isNumber(String s) {
         s = s.trim();
         boolean pointSeen = false;
         boolean eSeen = false;
-        boolean numberSeen = false;
-        boolean numberAfterE = true;
+        boolean numSeen = false;
+        boolean numAfterE = true;
         for (int i = 0; i < s.length(); i++) {
             if ('0' <= s.charAt(i) && s.charAt(i) <= '9') {
-                numberSeen = true;
-                numberAfterE = true;
+                numSeen = true;
+                numAfterE = true;
             } else if (s.charAt(i) == '.') {
                 if (eSeen || pointSeen) {
                     return false;
                 }
                 pointSeen = true;
-            } else if (s.charAt(i) == 'e') {
-                if (eSeen || !numberSeen) {
+            } else if (s.charAt(i) == 'e' || s.charAt(i) == 'E') {
+                if (eSeen || !numSeen) {
                     return false;
                 }
-                numberAfterE = false;
+                numAfterE = false;
                 eSeen = true;
             } else if (s.charAt(i) == '-' || s.charAt(i) == '+') {
-                if (i != 0 && s.charAt(i - 1) != 'e') {
+                if (i != 0 && (s.charAt(i - 1) != 'e' && s.charAt(i - 1) != 'E')) {
                     return false;
                 }
             } else {
                 return false;
             }
-        }
 
-        return numberSeen && numberAfterE;
+        }
+        return numSeen && numAfterE;
     }
 }
