@@ -8,3 +8,4 @@ src/.DS_Store
 /auxiliaryHelp.iml
 .settings/org.eclipse.m2e.core.prefs
 .settings/org.eclipse.*
+.github/modernize/assessment/reports/assessment-config.yaml

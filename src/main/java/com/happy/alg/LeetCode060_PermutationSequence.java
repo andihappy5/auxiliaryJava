@@ -35,26 +35,25 @@ public class LeetCode060_PermutationSequence {
         System.out.println(getPermutation(6,334));
     }
 
-    public static  String getPermutation(int n, int k) {
+    public static String getPermutation(int n, int k) {
         List<Integer> nums = new LinkedList();
 
         StringBuilder res = new StringBuilder();
         int[] f = new int[n];
-        f[0] = 1;              // 0's factorial is 1
-        for(int i = 1; i < n; i++){
+        f[0] = 1; // 0's factorial is 1
+        for (int i = 1; i < n; i++) {
             nums.add(i);
             f[i] = f[i - 1] * i;
         }
         nums.add(n);
-//        1!,2!,3!,4!
-
-        k--;   // 14th count from 1, turn to be 13th count from 0.
-
-        for(int i = n; i > 0; i--){
-            int idx = k / f[i - 1];
+        //        1, 1, 2,  6,   24,  120
+        //        0, 1!, 2!, 3!,  4!,   5!
+        k--; // 14th count from 1, turn to be 13th count from 0.
+        for (int i = n; i > 0; i--) {
+            int idx = k / f[i - 1]; //从大到小的，先判断能出来几个【1，，，，n-1】
             k = k % f[i - 1];
-            res.append(nums.get(idx));
-            nums.remove(idx);
+            res.append(nums.get(idx)); //如果包含了 2 个f[i - 1]，第一个元素就是 3,nums.get(idx)
+            nums.remove(idx); // nums 然后把第 2 个（从 0 开始）给删除了
         }
 
         return res.toString();
