@@ -6,6 +6,62 @@
     "configurations": [
         {
             "type": "java",
+            "name": "LeetCode84LargestRectangleinHistogram",
+            "request": "launch",
+            "mainClass": "com.happy.alg.LeetCode84LargestRectangleinHistogram",
+            "projectName": "auxiliaryHelp"
+        },
+        {
+            "type": "java",
+            "name": "LeetCode083RemoveDuplicatesfromSortedList",
+            "request": "launch",
+            "mainClass": "com.happy.alg.LeetCode083RemoveDuplicatesfromSortedList",
+            "projectName": "auxiliaryHelp"
+        },
+        {
+            "type": "java",
+            "name": "LeetCode082",
+            "request": "launch",
+            "mainClass": "com.happy.alg.LeetCode082",
+            "projectName": "auxiliaryHelp"
+        },
+        {
+            "type": "java",
+            "name": "LeetCode080RemoveDuplicatesfromSortedArrayII",
+            "request": "launch",
+            "mainClass": "com.happy.alg.LeetCode080RemoveDuplicatesfromSortedArrayII",
+            "projectName": "auxiliaryHelp"
+        },
+        {
+            "type": "java",
+            "name": "LeetCode079WordSearch$Solution",
+            "request": "launch",
+            "mainClass": "com.happy.alg.LeetCode079WordSearch$Solution",
+            "projectName": "auxiliaryHelp"
+        },
+        {
+            "type": "java",
+            "name": "LeetCode78Subsets$Solution",
+            "request": "launch",
+            "mainClass": "com.happy.alg.LeetCode78Subsets$Solution",
+            "projectName": "auxiliaryHelp"
+        },
+        {
+            "type": "java",
+            "name": "LeetCode77Combines$Solution",
+            "request": "launch",
+            "mainClass": "com.happy.alg.LeetCode77Combines$Solution",
+            "projectName": "auxiliaryHelp"
+        },
+        {
+            "type": "java",
+            "name": "LeetCode75SortColors",
+            "request": "launch",
+            "mainClass": "com.happy.alg.LeetCode75SortColors",
+            "projectName": "auxiliaryHelp"
+        },
+        {
+            "type": "java",
             "name": "LeetCode74Searcha2DMatrix",
             "request": "launch",
             "mainClass": "com.happy.alg.LeetCode74Searcha2DMatrix",
