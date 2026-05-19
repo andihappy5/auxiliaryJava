@@ -1,11 +1,11 @@
-package com.happy.alg.util;
+package com.happy.alg.customUtil;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import com.happy.alg.util.MyHashMap.LinkedHashMapEntry;
+import com.happy.alg.customUtil.MyHashMap.LinkedHashMapEntry;
 
 public class MyHashMap<K, V> extends HashMap<K, V> implements MyMap<K, V> {
 

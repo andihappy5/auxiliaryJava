@@ -6,6 +6,48 @@
     "configurations": [
         {
             "type": "java",
+            "name": "LeetCode088MergeSortedArray",
+            "request": "launch",
+            "mainClass": "com.happy.alg.LeetCode088MergeSortedArray",
+            "projectName": "auxiliaryHelp"
+        },
+        {
+            "type": "java",
+            "name": "LeetCode086PartitionList",
+            "request": "launch",
+            "mainClass": "com.happy.alg.LeetCode086PartitionList",
+            "projectName": "auxiliaryHelp"
+        },
+        {
+            "type": "java",
+            "name": "Array",
+            "request": "launch",
+            "mainClass": "com.happy.util.Array",
+            "projectName": "auxiliaryHelp"
+        },
+        {
+            "type": "java",
+            "name": "LeetCode85MaximalRectangle$Solution",
+            "request": "launch",
+            "mainClass": "com.happy.alg.LeetCode85MaximalRectangle$Solution",
+            "projectName": "auxiliaryHelp"
+        },
+        {
+            "type": "java",
+            "name": "PSE",
+            "request": "launch",
+            "mainClass": "com.happy.util.PSE",
+            "projectName": "auxiliaryHelp"
+        },
+        {
+            "type": "java",
+            "name": "LeetCode75SortColors",
+            "request": "launch",
+            "mainClass": "com.happy.alg.LeetCode75SortColors",
+            "projectName": "auxiliaryHelp"
+        },
+        {
+            "type": "java",
             "name": "LeetCode84LargestRectangleinHistogram",
             "request": "launch",
             "mainClass": "com.happy.alg.LeetCode84LargestRectangleinHistogram",

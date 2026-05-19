@@ -1,4 +1,4 @@
-package com.happy.alg.util;
+package com.happy.alg.customUtil;
 
 import java.util.HashMap;
 

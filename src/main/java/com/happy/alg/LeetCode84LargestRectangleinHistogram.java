@@ -33,8 +33,32 @@ public class LeetCode84LargestRectangleinHistogram {
      */
     public static void main(String[] args) {
         int[] values = new int[] { 2, 1, 5, 6, 2, 3 };
-        int v = largestRectangleArea(values);
+        int v = largestRectangleArea1(values);
         System.out.println(v);
+    }
+
+    // The idea is to fix each bar as the height of the rectangle and expand towards
+    // the left and right while the bars are at least as tall as the current bar.
+    // For every valid step, we keep adding the current bar’s height to the area. By
+    // doing this for all bars and keeping track of the maximum value.
+
+    // O(n2) Time and O(1) Space >> Time limit exceeded
+    public static int largestRectangleArea1(int[] arr) {
+        int res = 0, n = arr.length;
+        for (int i = 0; i < n; i++) {
+            int curr = arr[i];
+
+            // Traverse left while we have a greater height bar
+            for (int j = i - 1; j >= 0 && arr[j] >= arr[i]; j--)
+                curr += arr[i];
+
+            // Traverse right while we have a greater height bar
+            for (int j = i + 1; j < n && arr[j] >= arr[i]; j++)
+                curr += arr[i];
+
+            res = Math.max(res, curr);
+        }
+        return res;
     }
 
     public static int largestRectangleArea(int[] heights) {
@@ -69,5 +93,39 @@ public class LeetCode84LargestRectangleinHistogram {
             maxArea = Math.max(maxArea, heights[i] * width);
         }
         return maxArea;
+    }
+
+    static class finalClass {
+        static int getMaxArea(int[] arr) {
+            int n = arr.length;
+            Stack<Integer> st = new Stack<>();
+            int res = 0; // result
+            int top = 0; // statck stop value
+            int curr = 0; // current postion
+            for (int i = 0; i < arr.length; i++) {
+                // according to the rule: Process the stack while current element is smaller
+                // than
+                // the element corresponding to the top of the stack
+                while (!st.isEmpty() && arr[st.peek()] >= arr[i]) {
+                    // the popped item is to be considered as the smallest element of the histogrm
+                    top = st.pop();
+                    // for the popped item , previous smaller element is just below it in the stack(
+                    // or current stack top) and next smaller element is i
+                    int width = st.isEmpty() ? i : i - st.peek() - 1;
+                    // Update the result if needed
+                    res = Math.max(res, arr[top] * width);
+                }
+                st.push(i);
+            }
+            // For the remaining items in the stack, next smaller does
+            // not exist. Previous smaller is the item just below in
+            // the stack.
+            while (!st.isEmpty()) {
+                top = st.pop();
+                curr = arr[top] * (st.isEmpty() ? n : n - st.peek() - 1);
+                res = Math.max(res, curr);
+            }
+            return res;
+        }
     }
 }
