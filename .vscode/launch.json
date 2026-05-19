@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "LeetCode75SortColors",
+            "request": "launch",
+            "mainClass": "com.happy.alg.LeetCode75SortColors",
+            "projectName": "auxiliaryHelp"
+        },
+        {
+            "type": "java",
             "name": "LeetCode84LargestRectangleinHistogram",
             "request": "launch",
             "mainClass": "com.happy.alg.LeetCode84LargestRectangleinHistogram",

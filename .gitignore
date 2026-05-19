@@ -9,3 +9,4 @@ src/.DS_Store
 .settings/org.eclipse.m2e.core.prefs
 .settings/org.eclipse.*
 .github/modernize/assessment/reports/assessment-config.yaml
+.vscode/launch.json
