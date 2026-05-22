@@ -183,3 +183,17 @@ public class LeetCode91DecodeWays {
         return 0;
     }
 }
+//具体的范式：
+//Solution{
+//    /* initial conditions */
+//    dp[0] = ??
+//       :
+//
+//    /* bottom up method */
+//    foreach( i ){
+//        dp[i] = COMBINE dp[i-1] and dp[i-2] ;
+//    }
+//
+//    /* Return */
+//    return dp[last];
+//}
