@@ -50,31 +50,35 @@ public class LeetCode89GrayCode {
      * 
      */
 
-    class Solution {
+   static class Solution {
+        static void main() {
+            Solution s = new Solution();
+            System.out.println(s.grayCode(3));
+        }
         int limit; // maximum number
         List<Integer> ans; // return answer
         boolean flg;
 
         public List<Integer> grayCode(int n) {
-            limit = (int) Math.pow(2, n);
+            limit = (int) Math.pow(2, n); // n=3,limit=8
             ans = new ArrayList<>(); // return answer
             flg = false;
-            ArrayList<Integer> bit = new ArrayList<>(limit);
+            ArrayList<Integer> bit = new ArrayList<>(n);//limit=8,bit.size()=8
             for (int i = 0; i < n; i++) {
                 bit.add(0);
-            }
+            }// init bit = 00000000
 
             HashSet<Integer> set = new HashSet<>();
-            set.add(0);
+            set.add(0);//init set={0}
             ArrayList<Integer> res = new ArrayList<>();
-            res.add(0);
+            res.add(0);//init res={0}
             maker(res, set, bit);
             return ans;
         }
 
-        // ord: result for return
+        // ord: path value
         // set: visited values
-        // bit: operate current path
+        // bit: operate current result
         public void maker(ArrayList<Integer> ord, Set<Integer> set, ArrayList<Integer> bit) {
             // meet condition,
             if (ord.size() == limit) {
@@ -106,14 +110,10 @@ public class LeetCode89GrayCode {
             int pow = 0;
             int sum = 0;
             for (int ele : bit) {
-                sum += (ele * (int) Math.pow(2, pow++));
+                sum += (ele * (int) Math.pow(2, pow));
+                pow++;
             }
             return sum;
         }
-
-        public void maker2(ArrayList<Integer> ord, Set<Integer> set, ArrayList<Integer> bit) {
-
-        }
-
     }
 }
