@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class LeetCode89GrayCode {
+public class LeetCode089GrayCode {
 
     /**
      * An n-bit gray code sequence is a sequence of 2n integers where:
