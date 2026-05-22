@@ -72,9 +72,9 @@ public class LeetCode89GrayCode {
             return ans;
         }
 
-        // ord: result for return 
+        // ord: result for return
         // set: visited values
-        // bit: operate current path 
+        // bit: operate current path
         public void maker(ArrayList<Integer> ord, Set<Integer> set, ArrayList<Integer> bit) {
             // meet condition,
             if (ord.size() == limit) {
@@ -111,7 +111,9 @@ public class LeetCode89GrayCode {
             return sum;
         }
 
-        public void maker2(ArrayList<Integer> ord, Set<Integer> set, ArrayList<Integer> bit)
+        public void maker2(ArrayList<Integer> ord, Set<Integer> set, ArrayList<Integer> bit) {
+
+        }
 
     }
 }
