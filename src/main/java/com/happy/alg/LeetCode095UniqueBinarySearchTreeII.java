@@ -1,12 +1,11 @@
 package com.happy.alg;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.happy.util.TreeNode;
 
-public class LeetCode095 {
+public class LeetCode095UniqueBinarySearchTreeII {
     public static void main(String[] args) {
         System.out.println("Andihappy!");
     }
