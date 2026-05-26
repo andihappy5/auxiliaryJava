@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "LeetCode103BinaryTreeZigzagLevelOrderTraversal",
+            "request": "launch",
+            "mainClass": "com.happy.alg.LeetCode103BinaryTreeZigzagLevelOrderTraversal",
+            "projectName": "auxiliaryHelp"
+        },
+        {
+            "type": "java",
+            "name": "LeetCode102BinaryTreeLevelOrderTraversal",
+            "request": "launch",
+            "mainClass": "com.happy.alg.LeetCode102BinaryTreeLevelOrderTraversal",
+            "projectName": "auxiliaryHelp"
+        },
+        {
+            "type": "java",
+            "name": "LeetCode099RecoverBinarySearchTree$Solution",
+            "request": "launch",
+            "mainClass": "com.happy.alg.LeetCode099RecoverBinarySearchTree$Solution",
+            "projectName": "auxiliaryHelp"
+        },
+        {
+            "type": "java",
             "name": "LeetCode098ValidateBinarySearchTree",
             "request": "launch",
             "mainClass": "com.happy.alg.LeetCode098ValidateBinarySearchTree",

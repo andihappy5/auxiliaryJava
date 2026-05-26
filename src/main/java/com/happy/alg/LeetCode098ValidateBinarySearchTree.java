@@ -70,6 +70,6 @@ public class LeetCode098ValidateBinarySearchTree {
         if (root.right != null && root.right.val <= root.val) {
             return false;
         }
-        return isValidBST2(root.left) && isValidBST2(root.right);
+        return isValidBSTError(root.left) && isValidBSTError(root.right);
     }
 }
