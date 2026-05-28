@@ -8,10 +8,13 @@ import java.util.List;
 public class LeetCode113 {
     /**
      * Given the root of a binary tree and an integer targetSum,
-     * return all root-to-leaf paths where the sum of the node values in the path equals targetSum.
-     * Each path should be returned as a list of the node values, not node references.
+     * return all root-to-leaf paths where the sum of the node values in the path
+     * equals targetSum.
+     * Each path should be returned as a list of the node values, not node
+     * references.
      *
-     * A root-to-leaf path is a path starting from the root and ending at any leaf node.
+     * A root-to-leaf path is a path starting from the root and ending at any leaf
+     * node.
      * A leaf is a node with no children.
      *
      *
@@ -30,7 +33,7 @@ public class LeetCode113 {
      *
      * Input: root = [1,2], targetSum = 0
      * Output: []
-     * */
+     */
 
     public static void main() {
         TreeNode root = new TreeNode(5);
@@ -50,16 +53,18 @@ public class LeetCode113 {
 
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
         List<List<Integer>> result = new ArrayList<>();
-        if (root == null) return result;
+        if (root == null)
+            return result;
         List<Integer> path = new ArrayList<>();
-        path(path,result,root,targetSum);
+        path(path, result, root, targetSum);
         return result;
     }
 
     private void path(List<Integer> path, List<List<Integer>> result, TreeNode root, int targetSum) {
-        if (root == null) return;
+        if (root == null)
+            return;
         path.add(root.val);
-        targetSum  -= root.val;
+        targetSum -= root.val;
         if (targetSum == 0 && root.left == null && root.right == null) {
             result.add(new ArrayList<>(path));
             return;
@@ -68,17 +73,39 @@ public class LeetCode113 {
             return;
         }
         if (root.left != null) {
-            path(path,result,root.left,targetSum);
+            path(path, result, root.left, targetSum);
             path.remove(path.size() - 1);
         }
         if (root.right != null) {
-            path(path,result,root.right,targetSum);
+            path(path, result, root.right, targetSum);
             path.remove(path.size() - 1);
         }
     }
 
-    static  class SolutionCompare {
+    static class SolutionStandard {
+        public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+            List<List<Integer>> result = new ArrayList<>();
+            if (root == null)
+                return result;
+            path(new ArrayList<>(), result, root, targetSum);
+            return result;
+        }
 
+        private void path(List<Integer> path, List<List<Integer>> result, TreeNode root, int targetSum) {
+            if (root == null)
+                return;
+            path.add(root.val);
+            targetSum = targetSum - root.val;
+            if (targetSum == 0 && root.left == null && root.right == null) {
+                result.add(new ArrayList<>(path));
+            }
+            path(path, result, root.left, targetSum);
+            path(path, result, root.right, targetSum);
+            path.remove(path.size() - 1);
+        }
+    }
+
+    static class SolutionCompare {
         static void main() {
             TreeNode root = new TreeNode(5);
             root.left = new TreeNode(4);
@@ -97,26 +124,27 @@ public class LeetCode113 {
 
         public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
             List<List<Integer>> result = new ArrayList<>();
-            if (root == null) return result;
+            if (root == null)
+                return result;
             List<Integer> path = new ArrayList<>();
-            path(path,result,root,targetSum);
+            path(path, result, root, targetSum);
             return result;
         }
 
         private void path(List<Integer> path, List<List<Integer>> result, TreeNode root, int targetSum) {
-            if (root == null) return;
+            if (root == null)
+                return;
             path.add(root.val);
-            targetSum  = targetSum-root.val;
+            targetSum = targetSum - root.val;
             if (targetSum == 0 && root.left == null && root.right == null) {
                 result.add(new ArrayList<>(path));
             }
             if (targetSum != 0 && root.left == null && root.right == null) {
-                System.out.println("Root"+root + " Path:" + path);
                 path.remove(path.size() - 1);
                 return;
             }
-            path(path,result,root.left,targetSum);
-            path(path,result,root.right,targetSum);
+            path(path, result, root.left, targetSum);
+            path(path, result, root.right, targetSum);
             path.remove(path.size() - 1);
         }
     }
