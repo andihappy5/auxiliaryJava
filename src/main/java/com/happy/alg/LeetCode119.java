@@ -1,0 +1,23 @@
+package com.happy.alg;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class LeetCode119 {
+
+    public static void main(String[] args) {
+        System.out.println(new LeetCode119().getRow(3));
+    }
+
+    public List<Integer> getRow(int k) {
+        Integer[] arr = new Integer[k + 1];
+        Arrays.fill(arr, 0);
+        arr[0] = 1;
+        for (int i = 1; i <= k; i++)
+            for (int j = i; j > 0; j--)
+                arr[j] = arr[j] + arr[j - 1];
+
+        return Arrays.asList(arr);
+    }
+}
