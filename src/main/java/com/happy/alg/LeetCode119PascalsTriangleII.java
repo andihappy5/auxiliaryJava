@@ -1,13 +1,12 @@
 package com.happy.alg;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class LeetCode119 {
+public class LeetCode119PascalsTriangleII {
 
     public static void main(String[] args) {
-        System.out.println(new LeetCode119().getRow(3));
+        System.out.println(new LeetCode119PascalsTriangleII().getRow(3));
     }
 
     public List<Integer> getRow(int k) {

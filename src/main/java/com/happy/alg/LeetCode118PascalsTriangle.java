@@ -2,7 +2,7 @@ package com.happy.alg;
 
 import java.util.List;
 
-public class LeetCode118 {
+public class LeetCode118PascalsTriangle {
     
      public List<List<Integer>> generate(int numRows) {
         List<List<Integer>> res = new java.util.ArrayList<>();

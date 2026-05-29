@@ -2,7 +2,7 @@ package com.happy.alg;
 
 import com.happy.util.Node;
 
-public class LeetCode117PopulatingNextRightPointersinEachNodeII {
+public class LeetCode116PopulatingNextRightPointersinEachNode {
     // 117. Populating Next Right Pointers in Each Node II
     /**
      * Given a binary tree
@@ -50,7 +50,7 @@ public class LeetCode117PopulatingNextRightPointersinEachNodeII {
      */
 
     public static void main(String[] args) {
-        LeetCode117PopulatingNextRightPointersinEachNodeII solution = new LeetCode117PopulatingNextRightPointersinEachNodeII();
+        LeetCode116PopulatingNextRightPointersinEachNode solution = new LeetCode116PopulatingNextRightPointersinEachNode();
         Node root = Node.build(new Integer[] { 1, 2, 3, 4, 5, null, 7 });
         // Test cases can be added here
         solution.connect(root);
@@ -59,7 +59,7 @@ public class LeetCode117PopulatingNextRightPointersinEachNodeII {
     // 图形层序遍历，使用dummy节点串联每一层的节点
     public Node connect(Node root) {
         Node curr = root;
-
+        
         while (curr != null) {
             Node dummy = new Node(0);
             Node tail = dummy;
