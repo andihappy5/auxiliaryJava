@@ -2,7 +2,7 @@ package com.happy.alg;
 
 import java.util.List;
 
-public class LeetCode120 {
+public class LeetCode120Triangle {
     // 120. Triangle
     /**
      * Given a triangle array, return the minimum path sum from top to bottom.
