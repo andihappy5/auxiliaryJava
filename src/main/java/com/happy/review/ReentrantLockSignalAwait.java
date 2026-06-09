@@ -4,7 +4,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class PrintByLock {
+public class ReentrantLockSignalAwait {
     private static final int MAX = 100;
     private static int current = 1;
     private static final ReentrantLock lock = new ReentrantLock();

@@ -3,7 +3,7 @@ package com.happy.review;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-public class PrintByQueue {
+public class LoopPrintQueue {
     private static final int MAX = 100;
     private static int current = 1;
     // 使用两个队列分别代表“轮到奇数”和“轮到偶数”的许可

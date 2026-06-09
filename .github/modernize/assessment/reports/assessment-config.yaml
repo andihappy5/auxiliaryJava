@@ -12,3 +12,4 @@ java:
     - linux
     - windows
   enableContainerization: true
+  minimumCveSeverity: high

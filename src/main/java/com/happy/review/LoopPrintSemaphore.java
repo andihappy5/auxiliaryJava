@@ -2,7 +2,7 @@ package com.happy.review;
 
 import java.util.concurrent.Semaphore;
 
-public class AlternatePrintSemaphore {
+public class LoopPrintSemaphore {
     private static final int MAX = 100;
     private static int current = 1;
     private static final Semaphore oddSem = new Semaphore(1);

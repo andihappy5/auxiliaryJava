@@ -1,6 +1,6 @@
 package com.happy.review;
 
-public class AlternatePrint {
+public class LockNotifyAndWait {
 
     private static final int MAX = 100;
     private static int current = 1;

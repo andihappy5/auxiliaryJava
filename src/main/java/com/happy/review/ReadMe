@@ -1,0 +1,10 @@
+各方法对比总结
+方法	同步机制	是否阻塞	CPU 消耗	代码复杂度	适用场景
+synchronized + wait/notify	内置锁 + 等待集	是	低	中	传统 Java 基础学习
+Semaphore	信号量计数	是	低	低	资源许可控制，轻量交替
+ReentrantLock + Condition	显式锁 + 条件变量	是	低	中高	需要灵活等待条件 / 可中断
+BlockingQueue	阻塞队列	是	低	中	生产者-消费者模型，易扩展
+AtomicInteger + 自旋	CAS + volatile	否	高（忙等）	低	对延迟敏感且冲突极少的场景
+
+生产环境推荐：ReentrantLock + Condition 或 BlockingQueue，因为它们语义清晰、可控性好且不会意外消耗 CPU。
+如果只是学习线程协作，synchronized + wait/notify 和 Semaphore 已经足够。
