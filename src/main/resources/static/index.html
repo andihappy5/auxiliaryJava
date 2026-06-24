@@ -242,6 +242,76 @@
             color: #999;
         }
 
+        .graphql-section {
+            padding: 20px;
+            background: #f7f8ff;
+            border-radius: 10px;
+            border: 1px solid #ececff;
+        }
+
+        .graphql-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
+            align-items: center;
+        }
+
+        .graphql-field {
+            flex: 1 1 200px;
+            min-width: 180px;
+        }
+
+        .graphql-field label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: #444;
+        }
+
+        .graphql-field input,
+        .graphql-field textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d7d7ec;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .graphql-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .graphql-result {
+            background: #fff;
+            border: 1px solid #e5e7ff;
+            border-radius: 8px;
+            padding: 18px;
+        }
+
+        .graphql-item {
+            padding: 12px;
+            border-bottom: 1px solid #eef0ff;
+        }
+
+        .graphql-item:last-child {
+            border-bottom: none;
+        }
+
+        .graphql-item-title {
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 6px;
+        }
+
+        .graphql-item-meta {
+            font-size: 13px;
+            color: #555;
+        }
+
         .loading {
             text-align: center;
             padding: 20px;
@@ -298,6 +368,37 @@
             </div>
             <div id="fileList" class="file-list">
                 <div class="empty-state">暂无文件</div>
+            </div>
+        </div>
+
+        <!-- GraphQL 增删改查 -->
+        <div class="section">
+            <div class="section-title">GraphQL 增删改查</div>
+            <div class="graphql-section">
+                <div class="graphql-row">
+                    <div class="graphql-field">
+                        <label for="graphqlItemId">ID</label>
+                        <input type="number" id="graphqlItemId" placeholder="用于查询/更新/删除">
+                    </div>
+                    <div class="graphql-field">
+                        <label for="graphqlItemName">名称</label>
+                        <input type="text" id="graphqlItemName" placeholder="请输入项目名称">
+                    </div>
+                    <div class="graphql-field">
+                        <label for="graphqlItemDescription">描述</label>
+                        <textarea id="graphqlItemDescription" rows="2" placeholder="请输入项目描述"></textarea>
+                    </div>
+                </div>
+                <div class="graphql-actions">
+                    <button class="button btn-primary" onclick="createGraphQLItem()">新增</button>
+                    <button class="button btn-success" onclick="updateGraphQLItem()">更新</button>
+                    <button class="button btn-danger" onclick="deleteGraphQLItem()">删除</button>
+                    <button class="button btn-primary" onclick="loadGraphQLItems()">加载全部</button>
+                    <button class="button btn-success" onclick="loadGraphQLItemById()">查询单个</button>
+                </div>
+                <div id="graphqlResult" class="graphql-result">
+                    <div class="empty-state">GraphQL 操作结果将在此显示</div>
+                </div>
             </div>
         </div>
     </div>
@@ -462,6 +563,156 @@
             const sizes = ['B', 'KB', 'MB', 'GB'];
             const i = Math.floor(Math.log(bytes) / Math.log(k));
             return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function graphqlFetch(query, variables = {}) {
+            return fetch('/graphql', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ query, variables })
+            })
+                .then(response => response.json());
+        }
+
+        function renderGraphqlResult(result) {
+            const resultContainer = document.getElementById('graphqlResult');
+            if (result.errors) {
+                resultContainer.innerHTML = `<div class="message error">GraphQL 错误：${result.errors.map(err => err.message).join('; ')}</div>`;
+                return;
+            }
+            const data = result.data;
+            if (!data) {
+                resultContainer.innerHTML = '<div class="empty-state">无返回数据</div>';
+                return;
+            }
+            if (data.items) {
+                resultContainer.innerHTML = data.items.length > 0 ? data.items.map(item => `
+                    <div class="graphql-item">
+                        <div class="graphql-item-title">${item.name} (#${item.id})</div>
+                        <div class="graphql-item-meta">${item.description || '无描述'}</div>
+                    </div>
+                `).join('') : '<div class="empty-state">暂无 GraphQL 项目</div>';
+                return;
+            }
+            if (data.itemById) {
+                const item = data.itemById;
+                resultContainer.innerHTML = item ? `
+                    <div class="graphql-item">
+                        <div class="graphql-item-title">${item.name} (#${item.id})</div>
+                        <div class="graphql-item-meta">${item.description || '无描述'}</div>
+                    </div>
+                ` : '<div class="empty-state">未找到该 ID 的项目</div>';
+                return;
+            }
+            if (data.createItem) {
+                resultContainer.innerHTML = `
+                    <div class="graphql-item">
+                        <div class="graphql-item-title">创建成功：${data.createItem.name} (#${data.createItem.id})</div>
+                        <div class="graphql-item-meta">${data.createItem.description || '无描述'}</div>
+                    </div>
+                `;
+                showMessage('success', '✅ GraphQL 项目已创建');
+                return;
+            }
+            if (data.updateItem) {
+                resultContainer.innerHTML = data.updateItem ? `
+                    <div class="graphql-item">
+                        <div class="graphql-item-title">更新成功：${data.updateItem.name} (#${data.updateItem.id})</div>
+                        <div class="graphql-item-meta">${data.updateItem.description || '无描述'}</div>
+                    </div>
+                ` : '<div class="empty-state">更新失败或未找到该项目</div>';
+                showMessage('success', '✅ GraphQL 项目已更新');
+                return;
+            }
+            if (data.deleteItem !== undefined) {
+                resultContainer.innerHTML = `<div class="graphql-item-title">删除 ${data.deleteItem ? '成功' : '失败'}</div>`;
+                showMessage(data.deleteItem ? 'success' : 'error', data.deleteItem ? '✅ 删除成功' : '❌ 删除失败');
+                return;
+            }
+            resultContainer.innerHTML = '<div class="empty-state">操作完成</div>';
+        }
+
+        function getGraphqlInputValues() {
+            const id = document.getElementById('graphqlItemId').value;
+            const name = document.getElementById('graphqlItemName').value.trim();
+            const description = document.getElementById('graphqlItemDescription').value.trim();
+            return { id: id ? Number(id) : null, name, description };
+        }
+
+        function loadGraphQLItems() {
+            const query = `query { items { id name description } }`;
+            graphqlFetch(query)
+                .then(renderGraphqlResult)
+                .catch(error => {
+                    console.error(error);
+                    showMessage('error', '❌ GraphQL 查询失败');
+                });
+        }
+
+        function loadGraphQLItemById() {
+            const { id } = getGraphqlInputValues();
+            if (!id) {
+                showMessage('error', '请输入有效的 ID');
+                return;
+            }
+            const query = `query($id: ID!) { itemById(id: $id) { id name description } }`;
+            graphqlFetch(query, { id })
+                .then(renderGraphqlResult)
+                .catch(error => {
+                    console.error(error);
+                    showMessage('error', '❌ GraphQL 查询失败');
+                });
+        }
+
+        function createGraphQLItem() {
+            const { name, description } = getGraphqlInputValues();
+            if (!name) {
+                showMessage('error', '请输入名称');
+                return;
+            }
+            const mutation = `mutation($name: String!, $description: String) { createItem(name: $name, description: $description) { id name description } }`;
+            graphqlFetch(mutation, { name, description })
+                .then(renderGraphqlResult)
+                .catch(error => {
+                    console.error(error);
+                    showMessage('error', '❌ GraphQL 创建失败');
+                });
+        }
+
+        function updateGraphQLItem() {
+            const { id, name, description } = getGraphqlInputValues();
+            if (!id) {
+                showMessage('error', '请输入有效的 ID');
+                return;
+            }
+            if (!name && !description) {
+                showMessage('error', '请输入要更新的名称或描述');
+                return;
+            }
+            const mutation = `mutation($id: ID!, $name: String, $description: String) { updateItem(id: $id, name: $name, description: $description) { id name description } }`;
+            graphqlFetch(mutation, { id, name, description })
+                .then(renderGraphqlResult)
+                .catch(error => {
+                    console.error(error);
+                    showMessage('error', '❌ GraphQL 更新失败');
+                });
+        }
+
+        function deleteGraphQLItem() {
+            const { id } = getGraphqlInputValues();
+            if (!id) {
+                showMessage('error', '请输入有效的 ID');
+                return;
+            }
+            const mutation = `mutation($id: ID!) { deleteItem(id: $id) }`;
+            graphqlFetch(mutation, { id })
+                .then(renderGraphqlResult)
+                .catch(error => {
+                    console.error(error);
+                    showMessage('error', '❌ GraphQL 删除失败');
+                });
         }
 
         // 初始化加载文件列表
