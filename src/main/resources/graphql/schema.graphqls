@@ -1,0 +1,16 @@
+type GraphQLItem {
+  id: ID!
+  name: String!
+  description: String
+}
+
+type Query {
+  items: [GraphQLItem!]!
+  itemById(id: ID!): GraphQLItem
+}
+
+type Mutation {
+  createItem(name: String!, description: String): GraphQLItem
+  updateItem(id: ID!, name: String, description: String): GraphQLItem
+  deleteItem(id: ID!): Boolean!
+}
