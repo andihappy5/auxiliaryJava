@@ -31,9 +31,9 @@ public class JDK10Var {
         }
         int aa = 10;
         int bb = 11;
-        switch(aa+bb){
+        switch (aa + bb) {
             case 1:
-            return ;
+                return;
         }
 
     }
@@ -67,9 +67,29 @@ public class JDK10Var {
         v.start();
     }
 
-    //泛型
+    // 泛型
     private static <T extends Number> double add(T a, T b) {
         System.out.println(a + "+" + b + "=" + (a.doubleValue() + b.doubleValue()));
         return a.doubleValue() + b.doubleValue();
+    }
+
+    class Info<T> {
+        private T var; // 定义泛型变量
+
+        public void setVar(T var) {
+            this.var = var;
+        }
+
+        public T getVar() {
+            return this.var;
+        }
+
+        public String toString() { // 直接打印
+            return this.var.toString();
+        }
+    }
+
+    public static void fun(Info<? super String> temp) { // 只能接收String或Object类型的泛型，String类的父类只有Object类
+        System.out.print(temp + ", ");
     }
 }
