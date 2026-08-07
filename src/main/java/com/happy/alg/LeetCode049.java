@@ -1,9 +1,6 @@
 package com.happy.alg;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class LeetCode049 {
 
@@ -48,7 +45,7 @@ public class LeetCode049 {
     public static  List<List<String>> groupAnagrams(String[] strs) {
         if( null == strs || strs.length == 0) return new ArrayList<>();
         List<List<String>> result = new ArrayList<>();
-        HashMap<String,List<String>> judge = new HashMap<>();
+        Map<String,List<String>> judge = new HashMap<>();
         for (int i = 0; i < strs.length; i++) {
             String v = strs[i];
             char[] vvchar = v.toCharArray();

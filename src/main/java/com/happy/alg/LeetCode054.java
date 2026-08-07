@@ -100,7 +100,6 @@ public class LeetCode054 {
      * four loop used the locations confirm the answer
      * */
     public static List<Integer> spiralOrder(int[][] matrix) {
-
         int m = matrix.length;
         int n = matrix[0].length;
         int left = 0, right = n-1;
