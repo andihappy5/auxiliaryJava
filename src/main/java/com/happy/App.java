@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class App {
+    public static final String flag = "andi";
     public static void main(String[] args) {
         SpringApplication.run(App.class, args);
     }

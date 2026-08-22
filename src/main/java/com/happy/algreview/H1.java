@@ -2,9 +2,29 @@ package com.happy.algreview;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 public class H1 {
 
+    public static void main(String[] args) {
+        System.out.println(1^1);
+        System.out.println(1^0);
+        System.out.println(0^1);
+        System.out.println(0^0);
+    }
+
+
+    public int[] sortByBits(int[] arr) {
+        return IntStream.of(arr)
+                .boxed()
+                .sorted((a, b) -> {
+                    int ca = Integer.bitCount(a);
+                    int cb = Integer.bitCount(b);
+                    return ca != cb ? ca - cb : a - b;
+                })
+                .mapToInt(a -> a)
+                .toArray();
+    }
 
 
     public static String[] NumberPattern(int n) {
