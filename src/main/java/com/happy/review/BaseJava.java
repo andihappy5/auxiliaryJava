@@ -1,5 +1,7 @@
 package com.happy.review;
 
+import java.util.stream.Stream;
+
 public class BaseJava {
 
     //生成一个Java多态的案例
@@ -45,6 +47,21 @@ public class BaseJava {
 
 
     public static void main(String[] args) {
+
+        var ss = Stream.of("A", "BB", "CCC")
+                .filter(s -> {
+                    System.out.println("no print filter : " + s);
+                    return s.length() > 1;
+                }); //不会打印数据的
+        ss.findFirst(); // 执行到这里的是否，可以打印数据
+
+        Stream.of("A", "BB", "CCC")
+                .filter(s -> {
+                    System.out.println("print filter : " + s);
+                    return s.length() > 1;
+                }).count(); //不会打印数据的
+
+
         //Testing the polymorphism example
         PolymorphismExample.main(args);
 

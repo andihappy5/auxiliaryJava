@@ -27,7 +27,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * Thread 好比一个图书馆的书架（每个书架属于一个线程）。
  * ThreadLocalMap 好比书架上的格子。
  * ThreadLocal 好比一位图书管理员，他知道每一个读者（线程）应该从哪个书架取书。
- * 如果让你去找一本书，你会直接找管理员（ThreadLocal）：“帮我拿我的那本《Java 编程思想》”。管理员会根据你的身份（当前线程）找到你的专属书架，再从书架上找到对应的书给你。
+ * 如果让你去找一本书，你会直接找管理员（ThreadLocal）：“帮我拿我的那本《Java 编程思想》”。管理员会根据你的身份（当前线程）找到你的专属书架，
+ * 再从书架上找到对应的书给你。
  * 你不会要求书架自己提供“取书方法”，因为书架只是存储装置，不具有业务语义。同样，Thread 对象只是一个“拥有者”的角色，不是操作者。
  */
 public class ThreadLocalLeakDemo {
