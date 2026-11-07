@@ -4,6 +4,8 @@ package com.happy.review;
 import java.lang.annotation.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AnnotationReview {
 
@@ -19,6 +21,14 @@ public class AnnotationReview {
     }
 
     public static void main(String[] args) throws Exception {
+
+//        List<? extends Number> list1 = new ArrayList<Integer>();
+//        List<? super Integer> list2 = new ArrayList<Number>();
+//
+//        list1.add(10); // 1
+//        list2.add(10); // 2
+//        Number n = list2.get(0); // 3
+
         Class<?> clazz = AnnotationReview.AnnotatedClass.class;
 
         // 读取类注解

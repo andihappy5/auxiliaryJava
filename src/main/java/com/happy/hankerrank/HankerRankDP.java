@@ -4,11 +4,29 @@ import java.util.Arrays;
 import java.util.List;
 
 public class HankerRankDP {
+
     public static void main(String[] args) {
-       List<Integer> planSizes = List.of(1, 3, 4, 7);
-       int targetBandwidth = 10;
-       int result = findMinimumPlansForBandwidth(planSizes, targetBandwidth);
-       System.out.println("Minimum plans needed: " + result);
+        System.out.println(getWays(10, List.of(2,5,3,6)));
+    }
+
+    public static long getWays(int n, List<Integer> c) {
+        long[] dp = new long[n + 1];
+        dp[0] = 1;
+
+        for (long coin : c) {
+            for (int amount = (int) coin; amount <= n; amount++) {
+                dp[amount] += dp[amount - (int) coin];
+            }
+        }
+
+        return dp[n];
+    }
+
+    public static void t1(String[] args) {
+        List<Integer> planSizes = List.of(1, 3, 4, 7);
+        int targetBandwidth = 10;
+        int result = findMinimumPlansForBandwidth(planSizes, targetBandwidth);
+        System.out.println("Minimum plans needed: " + result);
     }
 
     public static int findMinimumPlansForBandwidth(
@@ -23,12 +41,13 @@ public class HankerRankDP {
         for (int size : planSizes) {
             // Ascending order allows the same plan to be reused.
             for (int s = size; s <= targetBandwidth; s++) {
-                dp[s] = Math.min(dp[s],dp[s - size] + 1);
+                dp[s] = Math.min(dp[s], dp[s - size] + 1);
             }
-            // System.out.println("After processing plan size " + size + ", dp array: " + Arrays.toString(dp));
+            // System.out.println("After processing plan size " + size + ", dp array: " +
+            // Arrays.toString(dp));
         }
 
-        return dp[targetBandwidth] == unreachable? -1 : dp[targetBandwidth];
+        return dp[targetBandwidth] == unreachable ? -1 : dp[targetBandwidth];
     }
 
     public static int climbStairs(int n) {
