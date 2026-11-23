@@ -625,7 +625,7 @@ public class Top150 {
 
         }
 
-        // 125. Valid Palindrome
+        // 125. Valid 
         class Solution125 {
             public boolean isPalindrome(String s) {
                 if (s == null || s.length() == 0)
@@ -1848,7 +1848,7 @@ public class Top150 {
 
     // 11
     // 146. LRU Cache
-    static class LRUCache {
+    static class Cache {
         private final int capacity;
         private final Map<Integer, Node> cache;
         // Each node in the list stores both the key and value.
