@@ -5,9 +5,8 @@ import java.util.PriorityQueue;
 
 public class KTree {
 
-    private final PriorityQueue<Integer> Heap = new PriorityQueue<>(k);;
-
     public void KMaxTree(int k, int[] nums) {
+        PriorityQueue<Integer> Heap = new PriorityQueue<>(k);
         for (int num : nums) {
             Heap.offer(num);
             if (Heap.size() > k) Heap.poll();
